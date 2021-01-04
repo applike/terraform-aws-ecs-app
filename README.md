@@ -16,5 +16,33 @@ module "example" {
 }
 ```
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-Error: no lines in file
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.14.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| application | Solution application, e.g. 'app' or 'jenkins' | `string` | `null` | no |
+| enable\_image\_tag | Set it to 'true' for parsing in a custom 'image\_tag' | `bool` | `false` | no |
+| environment | Environment, e.g. 'uw2', 'us-west-2', OR 'prod', 'staging', 'dev', 'UAT' | `string` | `null` | no |
+| environment\_variables | The environment variables to pass to the container. This is a list of maps. map\_environment overrides environment | <pre>list(object({<br>    name  = string<br>    value = string<br>  }))</pre> | `[]` | no |
+| family | Family, e.g. 'prod', 'staging', 'dev', OR 'source', 'build', 'test', 'deploy', 'release' | `string` | `null` | no |
+| image\_tag | The container image tag for the ECS task definition | `string` | `null` | no |
+| project | Project, which could be your organization name or abbreviation, e.g. 'eg' or 'cp' | `string` | `null` | no |
+| secrets | The secrets to pass to the container. This is a list of maps | <pre>list(object({<br>    name      = string<br>    valueFrom = string<br>  }))</pre> | `null` | no |
+
+## Outputs
+
+No output.
+
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

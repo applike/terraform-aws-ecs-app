@@ -118,4 +118,3 @@ module "ecs_service_task" {
     expression = "attribute:lifecycle == spot"
   }]
 }
-
