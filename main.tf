@@ -96,7 +96,7 @@ module "container_definition_fluentbit" {
 }
 
 module "ecs_service_task" {
-  enabled                   = var.enable_lb == false ? true : false
+  count                     = var.enable_lb ? 0 : 1
   source                    = "applike/ecs-service/aws"
   version                   = "1.1.2"
   project                   = module.label.project
@@ -121,7 +121,7 @@ module "ecs_service_task" {
 }
 
 module "ecs_lb_service_task" {
-  enabled                   = var.enable_lb
+  count                     = var.enable_lb ? 1 : 0
   source                    = "applike/ecs-service/aws"
   version                   = "1.1.2"
   project                   = module.label.project
@@ -136,7 +136,7 @@ module "ecs_lb_service_task" {
   enable_lb                 = true
 
   ecs_load_balancers = [{
-    target_group_arn = length(var.target_group_arn) > 0 ? var.target_group_arn : data.aws_lb_target_group.default[count.index].arn
+    target_group_arn = length(var.target_group_arn) > 0 ? var.target_group_arn : data.aws_lb_target_group.default.*.arn
     container_name   = module.label.application
     container_port   = 8088
   }]
