@@ -96,7 +96,7 @@ module "container_definition_fluentbit" {
 }
 
 module "ecs_service_task" {
-  count                     = var.enable_lb ? 0 : 1
+  enabled                   = var.enable_lb == false ? true : false
   source                    = "applike/ecs-service/aws"
   version                   = "1.1.2"
   project                   = module.label.project
@@ -121,7 +121,7 @@ module "ecs_service_task" {
 }
 
 module "ecs_lb_service_task" {
-  count                     = var.enable_lb ? 1 : 0
+  enabled                   = var.enable_lb
   source                    = "applike/ecs-service/aws"
   version                   = "1.1.2"
   project                   = module.label.project
