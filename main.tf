@@ -96,6 +96,7 @@ module "container_definition_fluentbit" {
 }
 
 module "ecs_service_task" {
+  enabled                   = var.enable_lb == true ? false : true
   source                    = "applike/ecs-service/aws"
   version                   = "1.1.2"
   project                   = module.label.project
@@ -107,16 +108,38 @@ module "ecs_service_task" {
   tags                      = module.label.tags
   task_role_arn             = data.aws_iam_role.default.arn
   task_exec_role_arn        = data.aws_iam_role.default.arn
-  enable_lb                 = var.enable_lb
 
-  dynamic "ecs_load_balancers" {
-    for_each = var.enable_lb == true ? [1] : []
-    content {
-      target_group_arn = data.aws_lb_target_group.default.arn
-      container_name   = module.label.application
-      container_port   = 8088
-    }
-  }
+  ordered_placement_strategy = [{
+    type  = "spread"
+    field = "instanceId"
+  }]
+
+  service_placement_constraints = [{
+    type       = "memberOf"
+    expression = "attribute:lifecycle == spot"
+  }]
+}
+
+module "ecs_lb_service_task" {
+  enabled                   = var.enable_lb
+  source                    = "applike/ecs-service/aws"
+  version                   = "1.1.2"
+  project                   = module.label.project
+  environment               = module.label.environment
+  family                    = module.label.family
+  application               = module.label.application
+  container_definition_json = "[${module.container_definition.json_map_encoded},${module.container_definition_fluentbit.json_map_encoded}]"
+  ecs_cluster_arn           = data.aws_ecs_cluster.default.id
+  tags                      = module.label.tags
+  task_role_arn             = data.aws_iam_role.default.arn
+  task_exec_role_arn        = data.aws_iam_role.default.arn
+  enable_lb                 = true
+
+  ecs_load_balancers = [{
+    target_group_arn = data.aws_lb_target_group.default.arn
+    container_name   = module.label.application
+    container_port   = 8088
+  }]
 
   ordered_placement_strategy = [{
     type  = "spread"
