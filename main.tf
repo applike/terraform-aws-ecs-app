@@ -110,6 +110,7 @@ module "ecs_service_task" {
   enable_lb                 = var.enable_lb
 
   dynamic "load_balancer" {
+    for_each = var.enable_lb == true ? var.ecs_load_balancers : []
     content {
       target_group_arn = data.aws_lb_target_group.default.arn
       container_name   = module.label.application
