@@ -63,17 +63,6 @@ data "aws_iam_role" "default" {
   name = "${module.data_label.id}-ecs"
 }
 
-data "aws_lb_target_group" "default" {
-  count = var.enable_lb ? 1 : 0
-  name  = module.label.environment == "prod" ? "${module.label.project}-pr-${module.label.family}-${module.ssm_label.application}" : "${module.label.project}-sb-${module.label.family}-${module.ssm_label.application}"
-  tags = {
-    Project     = module.label.project
-    Environment = module.label.environment
-    Family      = module.label.family
-    Application = module.label.application
-  }
-}
-
 data "aws_ssm_parameter" "container_cpu" {
   name = join(module.parameter_label.delimiter, ["", module.parameter_label.id, "resources/requests/cpu"])
 }
