@@ -109,8 +109,8 @@ module "ecs_service_task" {
   task_exec_role_arn        = data.aws_iam_role.default.arn
   enable_lb                 = var.enable_lb
 
-  dynamic "load_balancer" {
-    for_each = var.enable_lb == true ? var.ecs_load_balancers : []
+  dynamic "ecs_load_balancers" {
+    for_each = var.enable_lb == true ? [1] : []
     content {
       target_group_arn = data.aws_lb_target_group.default.arn
       container_name   = module.label.application
