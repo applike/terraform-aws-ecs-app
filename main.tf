@@ -96,7 +96,7 @@ module "container_definition_fluentbit" {
 }
 
 module "ecs_service_task" {
-  enabled                   = var.enable_lb == true ? false : true
+  enabled                   = var.enable_lb == false ? true : false
   source                    = "applike/ecs-service/aws"
   version                   = "1.1.2"
   project                   = module.label.project
