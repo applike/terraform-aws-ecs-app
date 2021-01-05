@@ -64,8 +64,7 @@ data "aws_iam_role" "default" {
 }
 
 data "aws_lb_target_group" "default" {
-  count = var.enable_lb == true ? 1 : 0
-  name  = module.label.environment == "prod" ? "${module.label.project}-pr-${module.label.family}-${module.ssm_label.application}" : "${module.label.project}-sb-${module.label.family}-${module.ssm_label.application}"
+  name = var.enable_lb == true ? module.label.environment == "prod" ? "${module.label.project}-pr-${module.label.family}-${module.ssm_label.application}" : "${module.label.project}-sb-${module.label.family}-${module.ssm_label.application}" : null
   tags = {
     Project     = module.label.project
     Environment = module.label.environment
