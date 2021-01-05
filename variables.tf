@@ -51,3 +51,9 @@ variable "enable_image_tag" {
   description = "Set it to 'true' for parsing in a custom 'image_tag'"
   default     = false
 }
+
+variable "enable_lb" {
+  type        = bool
+  description = "Set to false to prevent the module from creating any load balancer"
+  default     = false
+}

@@ -107,6 +107,16 @@ module "ecs_service_task" {
   tags                      = module.label.tags
   task_role_arn             = data.aws_iam_role.default.arn
   task_exec_role_arn        = data.aws_iam_role.default.arn
+  enable_lb                 = var.enable_lb
+
+  dynamic "load_balancer" {
+    ecs_load_balancers
+    content {
+      target_group_arn = data.aws_lb_target_group.default.arn
+      container_name   = module.label.application
+      container_port   = 8088
+    }
+  }
 
   ordered_placement_strategy = [{
     type  = "spread"
