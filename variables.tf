@@ -57,3 +57,9 @@ variable "enable_lb" {
   description = "Set to false to prevent the module from creating any load balancer"
   default     = false
 }
+
+variable "target_group_arn" {
+  type        = string
+  description = "The ARN of the Target Group to which to route traffic"
+  default     = ""
+}
