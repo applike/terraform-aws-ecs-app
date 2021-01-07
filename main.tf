@@ -25,6 +25,7 @@ module "container_definition" {
   environment                  = var.environment_variables
   secrets                      = var.secrets
   ulimits                      = var.ulimits
+  stop_timeout                 = var.stop_timeout
 
   port_mappings = [
     {
