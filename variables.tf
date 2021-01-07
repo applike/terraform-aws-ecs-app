@@ -57,3 +57,13 @@ variable "target_group_arn" {
   description = "The ARN of the Target Group to which to route traffic"
   default     = ""
 }
+
+variable "ulimits" {
+  type = list(object({
+    name      = string
+    hardLimit = number
+    softLimit = number
+  }))
+  description = "Container ulimit settings. This is a list of maps, where each map should contain \"name\", \"hardLimit\" and \"softLimit\""
+  default     = null
+}

@@ -22,7 +22,9 @@ module "container_definition" {
   container_cpu                = data.aws_ssm_parameter.container_cpu.value
   container_memory_reservation = data.aws_ssm_parameter.container_memory_reservation.value
   working_directory            = "/app"
-  environment                  = concat([], var.environment_variables)
+  environment                  = var.environment_variables
+  secrets                      = var.secrets
+  ulimits                      = var.ulimits
 
   port_mappings = [
     {
