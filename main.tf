@@ -15,6 +15,7 @@ module "ssm_label" {
 }
 
 module "container_definition" {
+  count                        = length(var.schedule_expression) == 0 ? 1 : 0
   source                       = "cloudposse/ecs-container-definition/aws"
   version                      = "0.46.1"
   container_name               = module.label.application
@@ -46,6 +47,26 @@ module "container_definition" {
       "wget --spider localhost:8090/health || exit 1",
     ]
   }
+
+  log_configuration = {
+    logDriver = "awsfirelens"
+    options   = {}
+  }
+}
+
+module "container_definition_scheduled" {
+  count                        = length(var.schedule_expression) > 0 ? 1 : 0
+  source                       = "cloudposse/ecs-container-definition/aws"
+  version                      = "0.46.1"
+  container_name               = module.label.application
+  container_image              = "${data.aws_ecr_repository.default.repository_url}:${data.aws_ecr_image.default.image_tag}"
+  container_cpu                = data.aws_ssm_parameter.container_cpu.value
+  container_memory_reservation = data.aws_ssm_parameter.container_memory_reservation.value
+  working_directory            = "/app"
+  environment                  = var.environment_variables
+  secrets                      = var.secrets
+  ulimits                      = var.ulimits
+  stop_timeout                 = var.stop_timeout
 
   log_configuration = {
     logDriver = "awsfirelens"
@@ -163,7 +184,7 @@ module "ecs_scheduled_task" {
   environment               = module.label.environment
   family                    = module.label.family
   application               = module.label.application
-  container_definition_json = "[${module.container_definition.json_map_encoded},${module.container_definition_fluentbit.json_map_encoded}]"
+  container_definition_json = "[${module.container_definition_scheduled.json_map_encoded},${module.container_definition_fluentbit.json_map_encoded}]"
   ecs_cluster_arn           = data.aws_ecs_cluster.default.id
   tags                      = module.label.tags
   task_role_arn             = data.aws_iam_role.default.arn
