@@ -99,7 +99,7 @@ module "container_definition_fluentbit" {
 }
 
 module "ecs_service_task" {
-  count                     = length(var.target_group_arn) > 0 ? 0 : 1
+  count                     = length(var.target_group_arn) == 0 && length(var.schedule_expression) == 0 ? 1 : 0
   source                    = "applike/ecs-service/aws"
   version                   = "1.1.2"
   project                   = module.label.project
