@@ -63,6 +63,10 @@ data "aws_iam_role" "default" {
   name = "${module.data_label.id}-ecs"
 }
 
+data "aws_iam_role" "event" {
+  name = "${module.data_label.id}-ecs-events"
+}
+
 data "aws_ssm_parameter" "container_cpu" {
   name = join(module.parameter_label.delimiter, ["", module.parameter_label.id, "resources/requests/cpu"])
 }
