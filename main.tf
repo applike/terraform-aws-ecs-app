@@ -158,7 +158,7 @@ module "ecs_lb_service_task" {
 module "ecs_scheduled_task" {
   count                     = length(var.schedule_expression) > 0 ? 1 : 0
   source                    = "applike/ecs-scheduled-task/aws"
-  version                   = "1.0.0"
+  version                   = "1.0.1"
   project                   = module.label.project
   environment               = module.label.environment
   family                    = module.label.family
