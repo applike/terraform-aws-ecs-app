@@ -1,6 +1,6 @@
 module "label" {
   source      = "applike/label/aws"
-  version     = "1.0.1"
+  version     = "1.0.2"
   project     = var.project
   application = var.application
   family      = var.family
@@ -9,7 +9,7 @@ module "label" {
 
 module "ssm_label" {
   source    = "applike/label/aws"
-  version   = "1.0.1"
+  version   = "1.0.2"
   context   = module.label.context
   delimiter = "/"
 }
@@ -143,6 +143,32 @@ module "ecs_lb_service_task" {
     container_name   = module.label.application
     container_port   = 8088
   }]
+
+  ordered_placement_strategy = [{
+    type  = "spread"
+    field = "instanceId"
+  }]
+
+  service_placement_constraints = [{
+    type       = "memberOf"
+    expression = "attribute:lifecycle == spot"
+  }]
+}
+
+module "ecs_scheduled_task" {
+  count                     = length(var.schedule_expression) > 0 ? 1 : 0
+  source                    = "applike/ecs-scheduled-task/aws"
+  version                   = "1.0.0"
+  project                   = module.label.project
+  environment               = module.label.environment
+  family                    = module.label.family
+  application               = module.label.application
+  container_definition_json = "[${module.container_definition.json_map_encoded},${module.container_definition_fluentbit.json_map_encoded}]"
+  ecs_cluster_arn           = data.aws_ecs_cluster.default.id
+  tags                      = module.label.tags
+  task_role_arn             = data.aws_iam_role.default.arn
+  task_exec_role_arn        = data.aws_iam_role.default.arn
+  schedule_expression       = var.schedule_expression
 
   ordered_placement_strategy = [{
     type  = "spread"

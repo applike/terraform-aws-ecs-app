@@ -73,3 +73,9 @@ variable "stop_timeout" {
   description = "Time duration (in seconds) to wait before the container is forcefully killed if it doesn't exit normally on its own"
   default     = null
 }
+
+variable "schedule_expression" {
+  type        = string
+  default     = null
+  description = "The scheduling expression. For example, cron(0 20 * * ? *) or rate(5 minutes). At least one of schedule_expression or event_pattern is required. Can only be used on the default event bus."
+}

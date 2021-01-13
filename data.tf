@@ -1,6 +1,6 @@
 module "data_label" {
   source      = "applike/label/aws"
-  version     = "1.0.1"
+  version     = "1.0.2"
   project     = var.project
   family      = var.family
   environment = var.environment
@@ -8,7 +8,7 @@ module "data_label" {
 
 module "parameter_label" {
   source      = "applike/label/aws"
-  version     = "1.0.1"
+  version     = "1.0.2"
   context     = module.data_label.context
   application = var.application
   delimiter   = "/"
@@ -16,7 +16,7 @@ module "parameter_label" {
 
 module "ecr_label" {
   source      = "applike/label/aws"
-  version     = "1.0.1"
+  version     = "1.0.2"
   context     = module.data_label.context
   environment = ""
   application = var.application
@@ -25,7 +25,7 @@ module "ecr_label" {
 
 module "log_router_label" {
   source      = "applike/label/aws"
-  version     = "1.0.1"
+  version     = "1.0.2"
   context     = module.data_label.context
   environment = ""
   family      = "monitoring"
