@@ -169,14 +169,4 @@ module "ecs_scheduled_task" {
   task_role_arn             = data.aws_iam_role.default.arn
   task_exec_role_arn        = data.aws_iam_role.default.arn
   schedule_expression       = var.schedule_expression
-
-  ordered_placement_strategy = [{
-    type  = "spread"
-    field = "instanceId"
-  }]
-
-  service_placement_constraints = [{
-    type       = "memberOf"
-    expression = "attribute:lifecycle == spot"
-  }]
 }
