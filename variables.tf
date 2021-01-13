@@ -1,24 +1,24 @@
 variable "project" {
   type        = string
-  default     = null
+  default     = ""
   description = "Project, which could be your organization name or abbreviation, e.g. 'eg' or 'cp'"
 }
 
 variable "environment" {
   type        = string
-  default     = null
+  default     = ""
   description = "Environment, e.g. 'uw2', 'us-west-2', OR 'prod', 'staging', 'dev', 'UAT'"
 }
 
 variable "family" {
   type        = string
-  default     = null
+  default     = ""
   description = "Family, e.g. 'prod', 'staging', 'dev', OR 'source', 'build', 'test', 'deploy', 'release'"
 }
 
 variable "application" {
   type        = string
-  default     = null
+  default     = ""
   description = "Solution application, e.g. 'app' or 'jenkins'"
 }
 
@@ -43,7 +43,7 @@ variable "secrets" {
 variable "image_tag" {
   type        = string
   description = "The container image tag for the ECS task definition"
-  default     = null
+  default     = ""
 }
 
 variable "enable_image_tag" {
@@ -76,6 +76,6 @@ variable "stop_timeout" {
 
 variable "schedule_expression" {
   type        = string
-  default     = null
+  default     = ""
   description = "The scheduling expression. For example, cron(0 20 * * ? *) or rate(5 minutes). At least one of schedule_expression or event_pattern is required. Can only be used on the default event bus."
 }
