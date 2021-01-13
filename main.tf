@@ -127,7 +127,7 @@ module "ecs_service_task" {
   environment               = module.label.environment
   family                    = module.label.family
   application               = module.label.application
-  container_definition_json = "[${module.container_definition.json_map_encoded},${module.container_definition_fluentbit.json_map_encoded}]"
+  container_definition_json = "[${module.container_definition.*.json_map_encoded},${module.container_definition_fluentbit.json_map_encoded}]"
   ecs_cluster_arn           = data.aws_ecs_cluster.default.id
   tags                      = module.label.tags
   task_role_arn             = data.aws_iam_role.default.arn
@@ -152,7 +152,7 @@ module "ecs_lb_service_task" {
   environment               = module.label.environment
   family                    = module.label.family
   application               = module.label.application
-  container_definition_json = "[${module.container_definition.json_map_encoded},${module.container_definition_fluentbit.json_map_encoded}]"
+  container_definition_json = "[${module.container_definition.*.json_map_encoded},${module.container_definition_fluentbit.json_map_encoded}]"
   ecs_cluster_arn           = data.aws_ecs_cluster.default.id
   tags                      = module.label.tags
   task_role_arn             = data.aws_iam_role.default.arn
@@ -184,7 +184,7 @@ module "ecs_scheduled_task" {
   environment               = module.label.environment
   family                    = module.label.family
   application               = module.label.application
-  container_definition_json = "[${module.container_definition_scheduled.json_map_encoded},${module.container_definition_fluentbit.json_map_encoded}]"
+  container_definition_json = "[${module.container_definition_scheduled.*.json_map_encoded},${module.container_definition_fluentbit.json_map_encoded}]"
   ecs_cluster_arn           = data.aws_ecs_cluster.default.id
   tags                      = module.label.tags
   task_role_arn             = data.aws_iam_role.default.arn
