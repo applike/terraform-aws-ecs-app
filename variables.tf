@@ -79,3 +79,15 @@ variable "schedule_expression" {
   default     = ""
   description = "The scheduling expression. For example, cron(0 20 * * ? *) or rate(5 minutes). At least one of schedule_expression or event_pattern is required. Can only be used on the default event bus."
 }
+
+variable "is_enabled" {
+  type        = bool
+  description = "Whether the rule should be enabled."
+  default     = true
+}
+
+variable "task_count" {
+  type        = number
+  description = "The number of tasks to create based on the TaskDefinition."
+  default     = null
+}

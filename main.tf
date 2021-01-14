@@ -179,7 +179,7 @@ module "ecs_lb_service_task" {
 module "ecs_scheduled_task" {
   count                     = length(var.schedule_expression) > 0 ? 1 : 0
   source                    = "applike/ecs-scheduled-task/aws"
-  version                   = "1.0.4"
+  version                   = "1.0.5"
   project                   = module.label.project
   environment               = module.label.environment
   family                    = module.label.family
@@ -191,4 +191,6 @@ module "ecs_scheduled_task" {
   task_exec_role_arn        = data.aws_iam_role.default.arn
   cloudwatch_event_role_arn = data.aws_iam_role.event.arn
   schedule_expression       = var.schedule_expression
+  is_enabled                = var.is_enabled
+  task_count                = var.task_count
 }
