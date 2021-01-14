@@ -122,7 +122,7 @@ module "container_definition_fluentbit" {
 module "ecs_service_task" {
   count                     = length(var.target_group_arn) == 0 && length(var.schedule_expression) == 0 ? 1 : 0
   source                    = "applike/ecs-service/aws"
-  version                   = "1.1.3"
+  version                   = "1.1.4"
   project                   = module.label.project
   environment               = module.label.environment
   family                    = module.label.family
@@ -147,7 +147,7 @@ module "ecs_service_task" {
 module "ecs_lb_service_task" {
   count                     = length(var.target_group_arn) > 0 ? 1 : 0
   source                    = "applike/ecs-service/aws"
-  version                   = "1.1.3"
+  version                   = "1.1.4"
   project                   = module.label.project
   environment               = module.label.environment
   family                    = module.label.family
