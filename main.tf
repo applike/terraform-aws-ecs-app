@@ -23,8 +23,7 @@ module "container_definition" {
   container_cpu                = data.aws_ssm_parameter.container_cpu.value
   container_memory_reservation = data.aws_ssm_parameter.container_memory_reservation.value
   working_directory            = "/app"
-  environment                  = var.environment_variables
-  map_environment              = var.map_environment_variables
+  map_environment              = var.environment_variables
   secrets                      = var.secrets
   ulimits                      = var.ulimits
   stop_timeout                 = var.stop_timeout
@@ -64,8 +63,7 @@ module "container_definition_scheduled" {
   container_cpu                = data.aws_ssm_parameter.container_cpu.value
   container_memory_reservation = data.aws_ssm_parameter.container_memory_reservation.value
   working_directory            = "/app"
-  environment                  = var.environment_variables
-  map_environment              = var.map_environment_variables
+  map_environment              = var.environment_variables
   secrets                      = var.secrets
   ulimits                      = var.ulimits
   stop_timeout                 = var.stop_timeout
@@ -101,24 +99,12 @@ module "container_definition_fluentbit" {
     }
   }
 
-  environment = [
-    {
-      name  = "ENVIRONMENT"
-      value = module.label.environment
-    },
-    {
-      name  = "PROJECT"
-      value = module.label.project
-    },
-    {
-      name  = "FAMILY"
-      value = module.label.family
-    },
-    {
-      name  = "APPLICATION"
-      value = module.label.application
-    },
-  ]
+  map_environment = {
+    ENVIRONMENT = module.label.environment
+    PROJECT     = module.label.project
+    FAMILY      = module.label.family
+    APPLICATION = module.label.application
+  }
 }
 
 module "ecs_service_task" {
