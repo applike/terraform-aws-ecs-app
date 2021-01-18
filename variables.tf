@@ -31,6 +31,12 @@ variable "environment_variables" {
   default     = []
 }
 
+variable "map_environment_variables" {
+  type        = map(string)
+  description = "The environment variables to pass to the container. This is a map of string: {key: value}. map_environment overrides environment"
+  default     = null
+}
+
 variable "secrets" {
   type = list(object({
     name      = string

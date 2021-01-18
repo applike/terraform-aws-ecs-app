@@ -24,6 +24,7 @@ module "container_definition" {
   container_memory_reservation = data.aws_ssm_parameter.container_memory_reservation.value
   working_directory            = "/app"
   environment                  = var.environment_variables
+  map_environment              = var.map_environment_variables
   secrets                      = var.secrets
   ulimits                      = var.ulimits
   stop_timeout                 = var.stop_timeout
@@ -64,6 +65,7 @@ module "container_definition_scheduled" {
   container_memory_reservation = data.aws_ssm_parameter.container_memory_reservation.value
   working_directory            = "/app"
   environment                  = var.environment_variables
+  map_environment              = var.map_environment_variables
   secrets                      = var.secrets
   ulimits                      = var.ulimits
   stop_timeout                 = var.stop_timeout
