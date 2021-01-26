@@ -91,7 +91,7 @@ variable "task_count" {
 
 variable "max_capacity" {
   type        = number
-  default     = ""
+  default     = null
   description = "The max capacity of the scalable target"
 }
 
