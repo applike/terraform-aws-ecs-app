@@ -88,3 +88,29 @@ variable "task_count" {
   description = "The number of tasks to create based on the TaskDefinition."
   default     = null
 }
+
+variable "max_capacity" {
+  type        = number
+  default     = ""
+  description = "The max capacity of the scalable target"
+}
+
+variable "min_capacity" {
+  type        = number
+  default     = 1
+  description = "The min capacity of the scalable target"
+}
+
+variable "target_tracking_configuration" {
+  type = list(object({
+    target_value       = number
+    scale_in_cooldown  = number
+    scale_out_cooldown = number
+    predefined_metric_specification = list(object({
+      predefined_metric_type = string
+      resource_label         = string
+    }))
+  }))
+  description = "A target tracking policy, requires policy_type = 'TargetTrackingScaling'"
+  default     = []
+}

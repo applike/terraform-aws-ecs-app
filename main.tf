@@ -182,3 +182,16 @@ module "ecs_scheduled_task" {
   is_enabled                = var.is_enabled
   task_count                = var.task_count
 }
+
+module "ecs_autoscaling" {
+  count                         = length(var.max_capacity) > 0 ? 1 : 0
+  source                        = "applike/ecs-autoscaling/aws"
+  version                       = "1.0.0"
+  project                       = module.label.project
+  environment                   = module.label.environment
+  family                        = module.label.family
+  application                   = module.label.application
+  max_capacity                  = var.max_capacity
+  min_capacity                  = var.min_capacity
+  target_tracking_configuration = var.target_tracking_configuration
+}
