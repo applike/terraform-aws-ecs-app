@@ -184,7 +184,7 @@ module "ecs_scheduled_task" {
 }
 
 module "ecs_autoscaling" {
-  count                         = length(var.max_capacity) > 0 ? 1 : 0
+  count                         = var.max_capacity > 0 ? 1 : 0
   source                        = "applike/ecs-autoscaling/aws"
   version                       = "1.0.1"
   project                       = module.label.project
