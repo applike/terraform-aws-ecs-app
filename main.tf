@@ -146,6 +146,7 @@ module "ecs_lb_service_task" {
   task_role_arn             = data.aws_iam_role.default.arn
   task_exec_role_arn        = data.aws_iam_role.default.arn
   enable_lb                 = true
+  volumes                   = var.volumes
 
   ecs_load_balancers = [{
     target_group_arn = var.target_group_arn
