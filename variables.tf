@@ -140,3 +140,13 @@ variable "volumes" {
   description = "Task volume definitions as list of configuration objects"
   default     = []
 }
+
+variable "ecs_load_balancers" {
+  type = list(object({
+    container_name   = string
+    container_port   = number
+    target_group_arn = string
+  }))
+  description = "A list of load balancer config objects for the ECS service; see `load_balancer` docs https://www.terraform.io/docs/providers/aws/r/ecs_service.html"
+  default     = []
+}

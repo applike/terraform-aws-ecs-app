@@ -148,11 +148,7 @@ module "ecs_lb_service_task" {
   enable_lb                 = true
   volumes                   = var.volumes
 
-  ecs_load_balancers = [{
-    target_group_arn = var.target_group_arn
-    container_name   = module.label.application
-    container_port   = 8088
-  }]
+  ecs_load_balancers = var.ecs_load_balancers
 
   ordered_placement_strategy = [{
     type  = "spread"
