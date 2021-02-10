@@ -22,6 +22,16 @@ variable "application" {
   description = "Solution application, e.g. 'app' or 'jenkins'"
 }
 
+variable "application_type" {
+  type        = string
+  description = "Type of the application, e.g. 'consumer', 'gateway' or 'redis'"
+
+  validation {
+    condition     = length(var.application_type) > 0
+    error_message = "The application_type value must be a non empty string."
+  }
+}
+
 variable "environment_variables" {
   type        = map(string)
   description = "The environment variables to pass to the container. This is a map of string: {key: value}. map_environment overrides environment"
