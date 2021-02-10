@@ -149,9 +149,12 @@ module "ecs_lb_service_task" {
   task_role_arn             = data.aws_iam_role.default.arn
   task_exec_role_arn        = data.aws_iam_role.default.arn
   enable_lb                 = true
-  volumes                   = var.volumes
 
-  ecs_load_balancers = var.ecs_load_balancers
+  ecs_load_balancers = [{
+    target_group_arn = var.target_group_arn
+    container_name   = module.label.application
+    container_port   = 8088
+  }]
 
   ordered_placement_strategy = [{
     type  = "spread"
@@ -181,30 +184,4 @@ module "ecs_scheduled_task" {
   schedule_expression       = var.schedule_expression
   is_enabled                = var.is_enabled
   task_count                = var.task_count
-}
-
-module "ecs_service_autoscaling" {
-  count                         = var.max_capacity > 0 && length(var.target_group_arn) == 0 ? 1 : 0
-  source                        = "applike/ecs-autoscaling/aws"
-  version                       = "1.0.3"
-  project                       = module.label.project
-  environment                   = module.label.environment
-  family                        = module.label.family
-  application                   = module.label.application
-  max_capacity                  = var.max_capacity
-  min_capacity                  = var.min_capacity
-  target_tracking_configuration = var.target_tracking_configuration
-}
-
-module "ecs_lb_service_autoscaling" {
-  count                         = var.max_capacity > 0 && length(var.target_group_arn) > 0 ? 1 : 0
-  source                        = "applike/ecs-autoscaling/aws"
-  version                       = "1.0.3"
-  project                       = module.label.project
-  environment                   = module.label.environment
-  family                        = module.label.family
-  application                   = module.label.application
-  max_capacity                  = var.max_capacity
-  min_capacity                  = var.min_capacity
-  target_tracking_configuration = var.target_tracking_configuration
 }
