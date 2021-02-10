@@ -5,6 +5,9 @@ module "label" {
   application = var.application
   family      = var.family
   environment = var.environment
+  tags = {
+    "ApplicationType" = var.application_type
+  }
 }
 
 module "ssm_label" {
