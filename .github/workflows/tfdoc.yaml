@@ -1,4 +1,4 @@
-name: tflint
+name: tfdoc
 on:
   push:
     branches:
@@ -6,14 +6,15 @@ on:
   pull_request:
 
 jobs:
-  tflint:
+  tfdoc:
     runs-on: ubuntu-latest
 
     steps:
       - name: Clone repo
         uses: actions/checkout@master
 
-      - name: tflint
-        uses: reviewdog/action-tflint@master
+      - name: Generate TF Docs
+        uses: terraform-docs/gh-actions@v0
         with:
-          github_token: ${{ secrets.github_token }}
+          output-file: README.md
+          git-push: true
