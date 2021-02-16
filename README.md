@@ -15,4 +15,69 @@ module "example" {
 }
 ```
 <!--- BEGIN_TF_DOCS --->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.14.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| container_definition | cloudposse/ecs-container-definition/aws | 0.46.1 |
+| container_definition_fluentbit | cloudposse/ecs-container-definition/aws | 0.46.1 |
+| container_definition_scheduled | cloudposse/ecs-container-definition/aws | 0.46.1 |
+| data_label | applike/label/aws | 1.0.2 |
+| ecr_label | applike/label/aws | 1.0.2 |
+| ecs_lb_service_task | applike/ecs-service/aws | 1.1.4 |
+| ecs_scheduled_task | applike/ecs-scheduled-task/aws | 1.0.5 |
+| ecs_service_task | applike/ecs-service/aws | 1.1.4 |
+| label | applike/label/aws | 1.0.2 |
+| log_router_label | applike/label/aws | 1.0.2 |
+| parameter_label | applike/label/aws | 1.0.2 |
+| ssm_label | applike/label/aws | 1.0.2 |
+
+## Resources
+
+| Name |
+|------|
+| [aws_ecr_image](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ecr_image) |
+| [aws_ecr_repository](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ecr_repository) |
+| [aws_ecs_cluster](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ecs_cluster) |
+| [aws_iam_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_role) |
+| [aws_service_discovery_service](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/service_discovery_service) |
+| [aws_ssm_parameter](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssm_parameter) |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| application | Solution application, e.g. 'app' or 'jenkins' | `string` | `""` | no |
+| application\_type | Type of the application, e.g. 'consumer', 'gateway' or 'redis' | `string` | n/a | yes |
+| enable\_image\_tag | Set it to 'true' for parsing in a custom 'image\_tag' | `bool` | `false` | no |
+| environment | Environment, e.g. 'uw2', 'us-west-2', OR 'prod', 'staging', 'dev', 'UAT' | `string` | `""` | no |
+| environment\_variables | The environment variables to pass to the container. This is a map of string: {key: value}. map\_environment overrides environment | `map(string)` | `null` | no |
+| family | Family, e.g. 'prod', 'staging', 'dev', OR 'source', 'build', 'test', 'deploy', 'release' | `string` | `""` | no |
+| image\_tag | The container image tag for the ECS task definition | `string` | `""` | no |
+| is\_enabled | Whether the rule should be enabled. | `bool` | `true` | no |
+| namespace\_id | The ID of the namespace to use for DNS configuration | `string` | `null` | no |
+| project | Project, which could be your organization name or abbreviation, e.g. 'eg' or 'cp' | `string` | `""` | no |
+| schedule\_expression | The scheduling expression. For example, cron(0 20 * * ? *) or rate(5 minutes). At least one of schedule\_expression or event\_pattern is required. Can only be used on the default event bus. | `string` | `""` | no |
+| secrets | The secrets to pass to the container. This is a list of maps | <pre>list(object({<br>    name      = string<br>    valueFrom = string<br>  }))</pre> | `null` | no |
+| stop\_timeout | Time duration (in seconds) to wait before the container is forcefully killed if it doesn't exit normally on its own | `number` | `null` | no |
+| target\_group\_arn | The ARN of the Target Group to which to route traffic | `string` | `""` | no |
+| task\_count | The number of tasks to create based on the TaskDefinition. | `number` | `null` | no |
+| ulimits | Container ulimit settings. This is a list of maps, where each map should contain "name", "hardLimit" and "softLimit" | <pre>list(object({<br>    name      = string<br>    hardLimit = number<br>    softLimit = number<br>  }))</pre> | `null` | no |
+
+## Outputs
+
+No output.
+
 <!--- END_TF_DOCS --->
