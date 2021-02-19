@@ -138,13 +138,6 @@ module "ecs_service_task" {
     type       = "memberOf"
     expression = "attribute:lifecycle == spot"
   }]
-
-  service_registries = [{
-    registry_arn   = aws_service_discovery_service.default.arn
-    port           = 0
-    container_name = module.label.application
-    container_port = 8070
-  }]
 }
 
 module "ecs_lb_service_task" {
@@ -177,13 +170,6 @@ module "ecs_lb_service_task" {
     type       = "memberOf"
     expression = "attribute:lifecycle == spot"
   }]
-
-  service_registries = [{
-    registry_arn   = aws_service_discovery_service.default.arn
-    port           = 0
-    container_name = module.label.application
-    container_port = 8070
-  }]
 }
 
 module "ecs_scheduled_task" {
@@ -203,20 +189,4 @@ module "ecs_scheduled_task" {
   schedule_expression       = var.schedule_expression
   is_enabled                = var.is_enabled
   task_count                = var.task_count
-}
-
-resource "aws_service_discovery_service" "default" {
-  name = var.application
-
-  dns_config {
-    namespace_id = var.namespace_id
-    dns_records {
-      ttl  = 60
-      type = "SRV"
-    }
-  }
-
-  health_check_custom_config {
-    failure_threshold = 1
-  }
 }
