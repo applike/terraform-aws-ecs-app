@@ -52,7 +52,6 @@ module "example" {
 | [aws_ecr_repository](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ecr_repository) |
 | [aws_ecs_cluster](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ecs_cluster) |
 | [aws_iam_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_role) |
-| [aws_service_discovery_service](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/service_discovery_service) |
 | [aws_ssm_parameter](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssm_parameter) |
 
 ## Inputs
@@ -67,7 +66,6 @@ module "example" {
 | family | Family, e.g. 'prod', 'staging', 'dev', OR 'source', 'build', 'test', 'deploy', 'release' | `string` | `""` | no |
 | image\_tag | The container image tag for the ECS task definition | `string` | `""` | no |
 | is\_enabled | Whether the rule should be enabled. | `bool` | `true` | no |
-| namespace\_id | The ID of the namespace to use for DNS configuration | `string` | `null` | no |
 | project | Project, which could be your organization name or abbreviation, e.g. 'eg' or 'cp' | `string` | `""` | no |
 | schedule\_expression | The scheduling expression. For example, cron(0 20 * * ? *) or rate(5 minutes). At least one of schedule\_expression or event\_pattern is required. Can only be used on the default event bus. | `string` | `""` | no |
 | secrets | The secrets to pass to the container. This is a list of maps | <pre>list(object({<br>    name      = string<br>    valueFrom = string<br>  }))</pre> | `null` | no |

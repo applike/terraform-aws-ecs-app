@@ -98,9 +98,3 @@ variable "task_count" {
   description = "The number of tasks to create based on the TaskDefinition."
   default     = null
 }
-
-variable "namespace_id" {
-  type        = string
-  description = "The ID of the namespace to use for DNS configuration"
-  default     = null
-}
