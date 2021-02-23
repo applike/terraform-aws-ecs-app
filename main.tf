@@ -30,6 +30,7 @@ module "container_definition" {
   secrets                      = var.secrets
   ulimits                      = var.ulimits
   stop_timeout                 = var.stop_timeout
+  docker_labels                = var.docker_labels
 
   port_mappings = [
     {
@@ -59,22 +60,6 @@ module "container_definition" {
   log_configuration = {
     logDriver = "awsfirelens"
     options   = {}
-  }
-
-  docker_labels = {
-    "traefik.enable"                                                                      = true
-    "traefik.http.routers.metadata-${module.label.application}.entrypoints"               = "metadata"
-    "traefik.http.services.metadata-${module.label.application}.loadbalancer.server.port" = 8070
-    "traefik.http.routers.metadata-${module.label.application}.service"                   = "metadata-${module.label.application}-${module.label.family}-${module.label.environment}"
-    "traefik.http.routers.metadata-${module.label.application}.rule"                      = "Host(`${module.label.application}.${module.label.family}.${module.label.environment}.justdice-ops.io`)"
-    "traefik.http.routers.gateway-${module.label.application}.entrypoints"                = "gateway"
-    "traefik.http.services.gateway-${module.label.application}.loadbalancer.server.port"  = 8088
-    "traefik.http.routers.gateway-${module.label.application}.service"                    = "gateway-${module.label.application}-${module.label.family}-${module.label.environment}"
-    "traefik.http.routers.gateway-${module.label.application}.rule"                       = "Host(`${module.label.application}.${module.label.family}.${module.label.environment}.justdice-ops.io`)"
-    "traefik.http.routers.health-${module.label.application}.entrypoints"                 = "health"
-    "traefik.http.services.health-${module.label.application}.loadbalancer.server.port"   = 8090
-    "traefik.http.routers.health-${module.label.application}.service"                     = "health-${module.label.application}-${module.label.family}-${module.label.environment}"
-    "traefik.http.routers.health-${module.label.application}.rule"                        = "Host(`${module.label.application}.${module.label.family}.${module.label.environment}.justdice-ops.io`)"
   }
 }
 

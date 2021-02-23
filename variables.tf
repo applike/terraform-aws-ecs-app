@@ -98,3 +98,9 @@ variable "task_count" {
   description = "The number of tasks to create based on the TaskDefinition."
   default     = null
 }
+
+variable "docker_labels" {
+  type        = map(string)
+  description = "The configuration options to send to the `docker_labels`"
+  default     = null
+}
