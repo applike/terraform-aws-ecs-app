@@ -98,3 +98,39 @@ variable "task_count" {
   description = "The number of tasks to create based on the TaskDefinition."
   default     = null
 }
+
+variable "docker_labels" {
+  type        = map(string)
+  description = "The configuration options to send to the `docker_labels`"
+  default     = null
+}
+
+variable "traefik_enabled" {
+  type        = bool
+  description = "Set it to 'true' for enabling traefik"
+  default     = true
+}
+
+variable "traefik_domain" {
+  type        = string
+  description = "Define the traefik domain to use"
+  default     = null
+}
+
+variable "port_metadata" {
+  type        = number
+  description = "Define the metadata port"
+  default     = 8070
+}
+
+variable "port_gateway" {
+  type        = number
+  description = "Define the gateway port"
+  default     = 8088
+}
+
+variable "port_health" {
+  type        = number
+  description = "Define the health port"
+  default     = 8090
+}

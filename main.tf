@@ -30,15 +30,16 @@ module "container_definition" {
   secrets                      = var.secrets
   ulimits                      = var.ulimits
   stop_timeout                 = var.stop_timeout
+  docker_labels                = var.traefik_enabled ? local.docker_labels : var.docker_labels
 
   port_mappings = [
     {
-      containerPort = 8088
+      containerPort = var.port_gateway
       hostPort      = 0
       protocol      = "tcp"
     },
     {
-      containerPort = 8070
+      containerPort = var.port_metadata
       hostPort      = 0
       protocol      = "tcp"
     },
@@ -52,7 +53,7 @@ module "container_definition" {
 
     command = [
       "CMD-SHELL",
-      "wget --spider localhost:8090/health || exit 1",
+      "wget --spider localhost:${var.port_health}/health || exit 1",
     ]
   }
 
@@ -158,7 +159,7 @@ module "ecs_lb_service_task" {
   ecs_load_balancers = [{
     target_group_arn = var.target_group_arn
     container_name   = module.label.application
-    container_port   = 8088
+    container_port   = var.port_gateway
   }]
 
   ordered_placement_strategy = [{
