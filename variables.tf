@@ -134,3 +134,9 @@ variable "port_health" {
   description = "Define the health port"
   default     = 8090
 }
+
+variable "desired_count" {
+  type        = number
+  description = "The number of instances of the task definition to place and keep running"
+  default     = 1
+}
