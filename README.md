@@ -61,6 +61,7 @@ module "example" {
 |------|-------------|------|---------|:--------:|
 | application | Solution application, e.g. 'app' or 'jenkins' | `string` | `""` | no |
 | application\_type | Type of the application, e.g. 'consumer', 'gateway' or 'redis' | `string` | n/a | yes |
+| desired\_count | The number of instances of the task definition to place and keep running | `number` | `1` | no |
 | docker\_labels | The configuration options to send to the `docker_labels` | `map(string)` | `null` | no |
 | enable\_image\_tag | Set it to 'true' for parsing in a custom 'image\_tag' | `bool` | `false` | no |
 | environment | Environment, e.g. 'uw2', 'us-west-2', OR 'prod', 'staging', 'dev', 'UAT' | `string` | `""` | no |

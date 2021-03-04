@@ -129,6 +129,7 @@ module "ecs_service_task" {
   tags                      = module.label.tags
   task_role_arn             = data.aws_iam_role.default.arn
   task_exec_role_arn        = data.aws_iam_role.default.arn
+  desired_count             = var.desired_count
 
   ordered_placement_strategy = [{
     type  = "spread"
@@ -154,6 +155,7 @@ module "ecs_lb_service_task" {
   tags                      = module.label.tags
   task_role_arn             = data.aws_iam_role.default.arn
   task_exec_role_arn        = data.aws_iam_role.default.arn
+  desired_count             = var.desired_count
   enable_lb                 = true
 
   ecs_load_balancers = [{
