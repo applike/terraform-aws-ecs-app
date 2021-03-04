@@ -135,6 +135,12 @@ variable "port_health" {
   default     = 8090
 }
 
+variable "bla" {
+  type        = number
+  description = "fu"
+  default     = 8090
+}
+
 variable "desired_count" {
   type        = number
   description = "The number of instances of the task definition to place and keep running"
