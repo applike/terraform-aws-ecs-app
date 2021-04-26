@@ -67,6 +67,7 @@ module "example" {
 | environment | Environment, e.g. 'uw2', 'us-west-2', OR 'prod', 'staging', 'dev', 'UAT' | `string` | `""` | no |
 | environment\_variables | The environment variables to pass to the container. This is a map of string: {key: value}. map\_environment overrides environment | `map(string)` | `null` | no |
 | family | Family, e.g. 'prod', 'staging', 'dev', OR 'source', 'build', 'test', 'deploy', 'release' | `string` | `""` | no |
+| health\_check\_grace\_period\_seconds | Define how long ecs should wait to do the first health check | `number` | `5` | no |
 | image\_tag | The container image tag for the ECS task definition | `string` | `""` | no |
 | is\_enabled | Whether the rule should be enabled. | `bool` | `true` | no |
 | port\_gateway | Define the gateway port | `number` | `8088` | no |

@@ -143,20 +143,21 @@ module "ecs_service_task" {
 }
 
 module "ecs_lb_service_task" {
-  count                     = length(var.target_group_arn) > 0 ? 1 : 0
-  source                    = "applike/ecs-service/aws"
-  version                   = "1.1.4"
-  project                   = module.label.project
-  environment               = module.label.environment
-  family                    = module.label.family
-  application               = module.label.application
-  container_definition_json = "[${join("", module.container_definition.*.json_map_encoded)},${module.container_definition_fluentbit.json_map_encoded}]"
-  ecs_cluster_arn           = data.aws_ecs_cluster.default.id
-  tags                      = module.label.tags
-  task_role_arn             = data.aws_iam_role.default.arn
-  task_exec_role_arn        = data.aws_iam_role.default.arn
-  desired_count             = var.desired_count
-  enable_lb                 = true
+  count                             = length(var.target_group_arn) > 0 ? 1 : 0
+  source                            = "applike/ecs-service/aws"
+  version                           = "1.1.4"
+  project                           = module.label.project
+  environment                       = module.label.environment
+  family                            = module.label.family
+  application                       = module.label.application
+  container_definition_json         = "[${join("", module.container_definition.*.json_map_encoded)},${module.container_definition_fluentbit.json_map_encoded}]"
+  ecs_cluster_arn                   = data.aws_ecs_cluster.default.id
+  tags                              = module.label.tags
+  task_role_arn                     = data.aws_iam_role.default.arn
+  task_exec_role_arn                = data.aws_iam_role.default.arn
+  desired_count                     = var.desired_count
+  enable_lb                         = true
+  health_check_grace_period_seconds = var.health_check_grace_period_seconds
 
   ecs_load_balancers = [{
     target_group_arn = var.target_group_arn

@@ -135,6 +135,12 @@ variable "port_health" {
   default     = 8090
 }
 
+variable "health_check_grace_period_seconds" {
+  type        = number
+  default     = 5
+  description = "Define how long ecs should wait to do the first health check"
+}
+
 variable "desired_count" {
   type        = number
   description = "The number of instances of the task definition to place and keep running"
