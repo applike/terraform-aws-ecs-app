@@ -151,7 +151,7 @@ module "ecs_lb_service_task" {
 module "ecs_scheduled_task" {
   count                     = length(var.schedule_expression) > 0 ? 1 : 0
   source                    = "applike/ecs-scheduled-task/aws"
-  version                   = "1.1.0"
+  version                   = "1.1.1"
   context                   = module.this.context
   container_definition_json = "[${join("", module.container_definition_scheduled.*.json_map_encoded)},${module.container_definition_fluentbit.json_map_encoded}]"
   ecs_cluster_arn           = data.aws_ecs_cluster.default.id
