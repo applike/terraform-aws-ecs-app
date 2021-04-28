@@ -1,37 +1,3 @@
-variable "project" {
-  type        = string
-  default     = ""
-  description = "Project, which could be your organization name or abbreviation, e.g. 'eg' or 'cp'"
-}
-
-variable "environment" {
-  type        = string
-  default     = ""
-  description = "Environment, e.g. 'uw2', 'us-west-2', OR 'prod', 'staging', 'dev', 'UAT'"
-}
-
-variable "family" {
-  type        = string
-  default     = ""
-  description = "Family, e.g. 'prod', 'staging', 'dev', OR 'source', 'build', 'test', 'deploy', 'release'"
-}
-
-variable "application" {
-  type        = string
-  default     = ""
-  description = "Solution application, e.g. 'app' or 'jenkins'"
-}
-
-variable "application_type" {
-  type        = string
-  description = "Type of the application, e.g. 'consumer', 'gateway' or 'redis'"
-
-  validation {
-    condition     = length(var.application_type) > 0
-    error_message = "The application_type value must be a non empty string."
-  }
-}
-
 variable "environment_variables" {
   type        = map(string)
   description = "The environment variables to pass to the container. This is a map of string: {key: value}. map_environment overrides environment"
@@ -39,11 +5,8 @@ variable "environment_variables" {
 }
 
 variable "secrets" {
-  type = list(object({
-    name      = string
-    valueFrom = string
-  }))
-  description = "The secrets to pass to the container. This is a list of maps"
+  type        = map(string)
+  description = "The secrets variables to pass to the container. This is a map of string: {key: value}. map_secrets overrides secrets"
   default     = null
 }
 
@@ -51,12 +14,6 @@ variable "image_tag" {
   type        = string
   description = "The container image tag for the ECS task definition"
   default     = ""
-}
-
-variable "enable_image_tag" {
-  type        = bool
-  description = "Set it to 'true' for parsing in a custom 'image_tag'"
-  default     = false
 }
 
 variable "target_group_arn" {
