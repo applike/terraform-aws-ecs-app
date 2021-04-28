@@ -1,36 +1,41 @@
 module "data_label" {
-  source      = "applike/label/aws"
-  version     = "1.0.2"
-  project     = var.project
-  family      = var.family
-  environment = var.environment
-}
+  source  = "applike/label/aws"
+  version = "1.1.0"
 
-module "parameter_label" {
-  source      = "applike/label/aws"
-  version     = "1.0.2"
-  context     = module.data_label.context
-  application = var.application
-  delimiter   = "/"
+  application = ""
+
+  context = module.this.context
 }
 
 module "ecr_label" {
-  source      = "applike/label/aws"
-  version     = "1.0.2"
-  context     = module.data_label.context
+  source  = "applike/label/aws"
+  version = "1.1.0"
+
   environment = ""
-  application = var.application
   delimiter   = "/"
+
+  context = module.this.context
+}
+
+module "parameter_label" {
+  source  = "applike/label/aws"
+  version = "1.1.0"
+
+  delimiter = "/"
+
+  context = module.this.context
 }
 
 module "log_router_label" {
-  source      = "applike/label/aws"
-  version     = "1.0.2"
-  context     = module.data_label.context
+  source  = "applike/label/aws"
+  version = "1.1.0"
+
   environment = ""
   family      = "monitoring"
   application = "ci"
   delimiter   = "/"
+
+  context = module.this.context
 }
 
 data "aws_ecs_cluster" "default" {
@@ -47,7 +52,7 @@ data "aws_ecr_repository" "default" {
 
 data "aws_ecr_image" "default" {
   repository_name = module.ecr_label.id
-  image_tag       = var.enable_image_tag ? var.image_tag : data.aws_ssm_parameter.container_tag.value
+  image_tag       = length(var.image_tag) != 0 ? var.image_tag : data.aws_ssm_parameter.container_tag.value
 }
 
 data "aws_ecr_repository" "log_router" {

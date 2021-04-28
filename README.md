@@ -31,9 +31,9 @@ module "example" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| container_definition | cloudposse/ecs-container-definition/aws | 0.46.1 |
-| container_definition_fluentbit | cloudposse/ecs-container-definition/aws | 0.46.1 |
-| container_definition_scheduled | cloudposse/ecs-container-definition/aws | 0.46.1 |
+| container_definition | cloudposse/ecs-container-definition/aws | 0.56.0 |
+| container_definition_fluentbit | cloudposse/ecs-container-definition/aws | 0.56.0 |
+| container_definition_scheduled | cloudposse/ecs-container-definition/aws | 0.56.0 |
 | data_label | applike/label/aws | 1.0.2 |
 | ecr_label | applike/label/aws | 1.0.2 |
 | ecs_lb_service_task | applike/ecs-service/aws | 1.1.4 |
