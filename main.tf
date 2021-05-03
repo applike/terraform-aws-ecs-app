@@ -130,6 +130,7 @@ module "ecs_lb_service_task" {
   task_exec_role_arn                = data.aws_iam_role.default.arn
   desired_count                     = var.desired_count
   health_check_grace_period_seconds = var.health_check_grace_period_seconds
+  service_registries                = var.service_registries
 
   ecs_load_balancers = [{
     target_group_arn = var.target_group_arn
