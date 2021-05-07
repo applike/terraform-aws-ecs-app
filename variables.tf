@@ -114,3 +114,75 @@ variable "service_registries" {
   description = "The service discovery registries for the service. The maximum number of service_registries blocks is 1. The currently supported service registry is Amazon Route 53 Auto Naming Service - `aws_service_discovery_service`; see `service_registries` docs https://www.terraform.io/docs/providers/aws/r/ecs_service.html#service_registries-1"
   default     = []
 }
+
+variable "resource_alarms_enabled" {
+  type        = bool
+  default     = true
+  description = "Defines if resource alarms should be created"
+}
+
+variable "resource_alarms_treat_missing_data" {
+  type        = string
+  default     = "breaching"
+  description = "How to treat missing data, defaults to 'breaching'"
+}
+
+variable "resource_alarms_average_period" {
+  type        = number
+  default     = 300
+  description = "Period for alarms based on averaging their metric"
+}
+
+variable "resource_alarms_average_evaluation_periods" {
+  type        = number
+  default     = 3
+  description = "Number of periods taking into account for alarms based on averaging their metric"
+}
+
+variable "resource_alarms_average_datapoints_to_alarm" {
+  type        = number
+  default     = 3
+  description = "Number of threshold breaches required for triggering alarms based on averaging their metric"
+}
+
+variable "resource_alarms_average_cpu_threshold" {
+  type        = number
+  default     = 95
+  description = "Upper threshold for average CPU utilization. Keep some headroom for covering bursts."
+}
+
+variable "resource_alarms_average_memory_threshold" {
+  type        = number
+  default     = 95
+  description = "Upper threshold for average memory utilization. Keep some headroom for covering bursts."
+}
+
+variable "resource_alarms_maximum_period" {
+  type        = number
+  default     = 60
+  description = "Period for alarms based on maximising their metric"
+}
+
+variable "resource_alarms_maximum_evaluation_periods" {
+  type        = number
+  default     = 10
+  description = "Number of periods taking into account for alarms based on maximising their metric"
+}
+
+variable "resource_alarms_maximum_datapoints_to_alarm" {
+  type        = number
+  default     = 3
+  description = "Number of threshold breaches required for triggering alarms based on maximising their metric"
+}
+
+variable "resource_alarms_maximum_cpu_threshold" {
+  type        = number
+  default     = 150
+  description = "Upper threshold for maximum CPU utilization"
+}
+
+variable "resource_alarms_maximum_memory_threshold" {
+  type        = number
+  default     = 150
+  description = "Upper threshold for maximum memory utilization"
+}

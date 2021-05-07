@@ -31,6 +31,7 @@ module "example" {
 
 | Name | Source | Version |
 |------|--------|---------|
+| alarm-service-resources | applike/alarm-service-resources/aws | 1.0.0 |
 | container_definition | cloudposse/ecs-container-definition/aws | 0.56.0 |
 | container_definition_fluentbit | cloudposse/ecs-container-definition/aws | 0.56.0 |
 | container_definition_scheduled | cloudposse/ecs-container-definition/aws | 0.56.0 |
@@ -81,6 +82,18 @@ module "example" {
 | port\_metadata | Define the metadata port | `number` | `8070` | no |
 | project | Project, which could be your organization name or abbreviation, e.g. 'eg' or 'cp' | `string` | `null` | no |
 | regex\_replace\_chars | Regex to replace chars with empty string in `project`, `environment`, `family` and `application`.<br>If not set, `"/[^a-zA-Z0-9-]/"` is used to remove all characters other than hyphens, letters and digits. | `string` | `null` | no |
+| resource\_alarms\_average\_cpu\_threshold | Upper threshold for average CPU utilization. Keep some headroom for covering bursts. | `number` | `95` | no |
+| resource\_alarms\_average\_datapoints\_to\_alarm | Number of threshold breaches required for triggering alarms based on averaging their metric | `number` | `3` | no |
+| resource\_alarms\_average\_evaluation\_periods | Number of periods taking into account for alarms based on averaging their metric | `number` | `3` | no |
+| resource\_alarms\_average\_memory\_threshold | Upper threshold for average memory utilization. Keep some headroom for covering bursts. | `number` | `95` | no |
+| resource\_alarms\_average\_period | Period for alarms based on averaging their metric | `number` | `300` | no |
+| resource\_alarms\_enabled | Defines if resource alarms should be created | `bool` | `true` | no |
+| resource\_alarms\_maximum\_cpu\_threshold | Upper threshold for maximum CPU utilization | `number` | `150` | no |
+| resource\_alarms\_maximum\_datapoints\_to\_alarm | Number of threshold breaches required for triggering alarms based on maximising their metric | `number` | `3` | no |
+| resource\_alarms\_maximum\_evaluation\_periods | Number of periods taking into account for alarms based on maximising their metric | `number` | `10` | no |
+| resource\_alarms\_maximum\_memory\_threshold | Upper threshold for maximum memory utilization | `number` | `150` | no |
+| resource\_alarms\_maximum\_period | Period for alarms based on maximising their metric | `number` | `60` | no |
+| resource\_alarms\_treat\_missing\_data | How to treat missing data, defaults to 'breaching' | `string` | `"breaching"` | no |
 | schedule\_expression | The scheduling expression. For example, cron(0 20 * * ? *) or rate(5 minutes). At least one of schedule\_expression or event\_pattern is required. Can only be used on the default event bus. | `string` | `""` | no |
 | secrets | The secrets variables to pass to the container. This is a map of string: {key: value}. map\_secrets overrides secrets | `map(string)` | `null` | no |
 | service\_registries | The service discovery registries for the service. The maximum number of service\_registries blocks is 1. The currently supported service registry is Amazon Route 53 Auto Naming Service - `aws_service_discovery_service`; see `service_registries` docs https://www.terraform.io/docs/providers/aws/r/ecs_service.html#service_registries-1 | <pre>list(object({<br>    registry_arn   = string<br>    port           = number<br>    container_name = string<br>    container_port = number<br>  }))</pre> | `[]` | no |
