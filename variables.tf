@@ -186,3 +186,9 @@ variable "resource_alarms_maximum_memory_threshold" {
   default     = 150
   description = "Upper threshold for maximum memory utilization"
 }
+
+variable "working_directory" {
+  type        = string
+  description = "The working directory to run commands inside the container"
+  default     = "/app"
+}
