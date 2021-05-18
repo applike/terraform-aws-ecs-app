@@ -6,7 +6,7 @@ module "container_definition" {
   container_image              = "${data.aws_ecr_repository.default.repository_url}:${data.aws_ecr_image.default.image_tag}"
   container_cpu                = data.aws_ssm_parameter.container_cpu.value
   container_memory_reservation = data.aws_ssm_parameter.container_memory_reservation.value
-  working_directory            = "/app"
+  working_directory            = var.working_directory
   map_environment              = var.environment_variables
   map_secrets                  = var.secrets
   ulimits                      = var.ulimits
@@ -52,7 +52,7 @@ module "container_definition_scheduled" {
   container_image              = "${data.aws_ecr_repository.default.repository_url}:${data.aws_ecr_image.default.image_tag}"
   container_cpu                = data.aws_ssm_parameter.container_cpu.value
   container_memory_reservation = data.aws_ssm_parameter.container_memory_reservation.value
-  working_directory            = "/app"
+  working_directory            = var.working_directory
   map_environment              = var.environment_variables
   map_secrets                  = var.secrets
   ulimits                      = var.ulimits
