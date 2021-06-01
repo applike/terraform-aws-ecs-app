@@ -31,7 +31,7 @@ module "example" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_alarm-service-resources"></a> [alarm-service-resources](#module\_alarm-service-resources) | applike/alarm-service-resources/aws | 1.0.0 |
+| <a name="module_alarm-service-resources"></a> [alarm-service-resources](#module\_alarm-service-resources) | applike/alarm-service-resources/aws | 1.1.0 |
 | <a name="module_container_definition"></a> [container\_definition](#module\_container\_definition) | cloudposse/ecs-container-definition/aws | 0.56.0 |
 | <a name="module_container_definition_fluentbit"></a> [container\_definition\_fluentbit](#module\_container\_definition\_fluentbit) | cloudposse/ecs-container-definition/aws | 0.56.0 |
 | <a name="module_container_definition_scheduled"></a> [container\_definition\_scheduled](#module\_container\_definition\_scheduled) | cloudposse/ecs-container-definition/aws | 0.56.0 |
