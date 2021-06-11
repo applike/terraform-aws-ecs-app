@@ -123,67 +123,67 @@ variable "resource_alarms_enabled" {
 
 variable "resource_alarms_treat_missing_data" {
   type        = string
-  default     = ""
+  default     = "breaching"
   description = "How to treat missing data, defaults to 'breaching'"
 }
 
 variable "resource_alarms_average_period" {
   type        = number
-  default     = null
+  default     = 300
   description = "Period for alarms based on averaging their metric"
 }
 
 variable "resource_alarms_average_evaluation_periods" {
   type        = number
-  default     = null
+  default     = 3
   description = "Number of periods taking into account for alarms based on averaging their metric"
 }
 
 variable "resource_alarms_average_datapoints_to_alarm" {
   type        = number
-  default     = null
+  default     = 3
   description = "Number of threshold breaches required for triggering alarms based on averaging their metric"
 }
 
 variable "resource_alarms_average_cpu_threshold" {
   type        = number
-  default     = null
+  default     = 100
   description = "Upper threshold for average CPU utilization. Keep some headroom for covering bursts."
 }
 
 variable "resource_alarms_average_memory_threshold" {
   type        = number
-  default     = null
+  default     = 100
   description = "Upper threshold for average memory utilization. Keep some headroom for covering bursts."
 }
 
 variable "resource_alarms_maximum_period" {
   type        = number
-  default     = null
+  default     = 60
   description = "Period for alarms based on maximising their metric"
 }
 
 variable "resource_alarms_maximum_evaluation_periods" {
   type        = number
-  default     = null
+  default     = 10
   description = "Number of periods taking into account for alarms based on maximising their metric"
 }
 
 variable "resource_alarms_maximum_datapoints_to_alarm" {
   type        = number
-  default     = null
+  default     = 3
   description = "Number of threshold breaches required for triggering alarms based on maximising their metric"
 }
 
 variable "resource_alarms_maximum_cpu_threshold" {
   type        = number
-  default     = null
+  default     = 150
   description = "Upper threshold for maximum CPU utilization"
 }
 
 variable "resource_alarms_maximum_memory_threshold" {
   type        = number
-  default     = null
+  default     = 150
   description = "Upper threshold for maximum memory utilization"
 }
 
