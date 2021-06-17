@@ -100,7 +100,7 @@ module "container_definition_fluentbit" {
 module "ecs_service_task" {
   count                     = length(var.target_group_arn) == 0 && length(var.schedule_expression) == 0 ? 1 : 0
   source                    = "applike/ecs-service/aws"
-  version                   = "1.3.0"
+  version                   = "1.3.1"
   context                   = module.this.context
   container_definition_json = "[${join("", module.container_definition.*.json_map_encoded)},${module.container_definition_fluentbit.json_map_encoded}]"
   ecs_cluster_arn           = data.aws_ecs_cluster.default.id
@@ -124,7 +124,7 @@ module "ecs_service_task" {
 module "ecs_lb_service_task" {
   count                             = length(var.target_group_arn) > 0 ? 1 : 0
   source                            = "applike/ecs-service/aws"
-  version                           = "1.3.0"
+  version                           = "1.3.1"
   context                           = module.this.context
   container_definition_json         = "[${join("", module.container_definition.*.json_map_encoded)},${module.container_definition_fluentbit.json_map_encoded}]"
   ecs_cluster_arn                   = data.aws_ecs_cluster.default.id
@@ -157,7 +157,7 @@ module "ecs_lb_service_task" {
 module "ecs_scheduled_task" {
   count                     = length(var.schedule_expression) > 0 ? 1 : 0
   source                    = "applike/ecs-scheduled-task/aws"
-  version                   = "1.2.0"
+  version                   = "1.2.1"
   context                   = module.this.context
   container_definition_json = "[${join("", module.container_definition_scheduled.*.json_map_encoded)},${module.container_definition_fluentbit.json_map_encoded}]"
   ecs_cluster_arn           = data.aws_ecs_cluster.default.id
