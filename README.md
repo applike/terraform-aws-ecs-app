@@ -32,14 +32,14 @@ module "example" {
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_alarm-service-resources"></a> [alarm-service-resources](#module\_alarm-service-resources) | applike/alarm-service-resources/aws | 1.1.0 |
-| <a name="module_container_definition"></a> [container\_definition](#module\_container\_definition) | cloudposse/ecs-container-definition/aws | 0.56.0 |
-| <a name="module_container_definition_fluentbit"></a> [container\_definition\_fluentbit](#module\_container\_definition\_fluentbit) | cloudposse/ecs-container-definition/aws | 0.56.0 |
-| <a name="module_container_definition_scheduled"></a> [container\_definition\_scheduled](#module\_container\_definition\_scheduled) | cloudposse/ecs-container-definition/aws | 0.56.0 |
+| <a name="module_container_definition"></a> [container\_definition](#module\_container\_definition) | cloudposse/ecs-container-definition/aws | 0.57.0 |
+| <a name="module_container_definition_fluentbit"></a> [container\_definition\_fluentbit](#module\_container\_definition\_fluentbit) | cloudposse/ecs-container-definition/aws | 0.57.0 |
+| <a name="module_container_definition_scheduled"></a> [container\_definition\_scheduled](#module\_container\_definition\_scheduled) | cloudposse/ecs-container-definition/aws | 0.57.0 |
 | <a name="module_data_label"></a> [data\_label](#module\_data\_label) | applike/label/aws | 1.1.0 |
 | <a name="module_ecr_label"></a> [ecr\_label](#module\_ecr\_label) | applike/label/aws | 1.1.0 |
-| <a name="module_ecs_lb_service_task"></a> [ecs\_lb\_service\_task](#module\_ecs\_lb\_service\_task) | applike/ecs-service/aws | 1.2.0 |
-| <a name="module_ecs_scheduled_task"></a> [ecs\_scheduled\_task](#module\_ecs\_scheduled\_task) | applike/ecs-scheduled-task/aws | 1.1.1 |
-| <a name="module_ecs_service_task"></a> [ecs\_service\_task](#module\_ecs\_service\_task) | applike/ecs-service/aws | 1.2.0 |
+| <a name="module_ecs_lb_service_task"></a> [ecs\_lb\_service\_task](#module\_ecs\_lb\_service\_task) | applike/ecs-service/aws | 1.3.0 |
+| <a name="module_ecs_scheduled_task"></a> [ecs\_scheduled\_task](#module\_ecs\_scheduled\_task) | applike/ecs-scheduled-task/aws | 1.2.0 |
+| <a name="module_ecs_service_task"></a> [ecs\_service\_task](#module\_ecs\_service\_task) | applike/ecs-service/aws | 1.3.0 |
 | <a name="module_locals_label"></a> [locals\_label](#module\_locals\_label) | applike/label/aws | 1.1.0 |
 | <a name="module_log_router_label"></a> [log\_router\_label](#module\_log\_router\_label) | applike/label/aws | 1.1.0 |
 | <a name="module_parameter_label"></a> [parameter\_label](#module\_parameter\_label) | applike/label/aws | 1.1.0 |
