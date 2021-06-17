@@ -1,7 +1,7 @@
 module "container_definition" {
   count                        = length(var.schedule_expression) == 0 ? 1 : 0
   source                       = "cloudposse/ecs-container-definition/aws"
-  version                      = "0.56.0"
+  version                      = "0.57.0"
   container_name               = module.this.application
   container_image              = "${data.aws_ecr_repository.default.repository_url}:${data.aws_ecr_image.default.image_tag}"
   container_cpu                = data.aws_ssm_parameter.container_cpu.value
@@ -47,7 +47,7 @@ module "container_definition" {
 module "container_definition_scheduled" {
   count                        = length(var.schedule_expression) > 0 ? 1 : 0
   source                       = "cloudposse/ecs-container-definition/aws"
-  version                      = "0.56.0"
+  version                      = "0.57.0"
   container_name               = module.this.application
   container_image              = "${data.aws_ecr_repository.default.repository_url}:${data.aws_ecr_image.default.image_tag}"
   container_cpu                = data.aws_ssm_parameter.container_cpu.value
@@ -66,7 +66,7 @@ module "container_definition_scheduled" {
 
 module "container_definition_fluentbit" {
   source                       = "cloudposse/ecs-container-definition/aws"
-  version                      = "0.56.0"
+  version                      = "0.57.0"
   container_name               = "log_router"
   container_image              = "${data.aws_ecr_repository.log_router.repository_url}:${data.aws_ecr_image.log_router.image_tag}"
   container_memory_reservation = 4
@@ -100,7 +100,7 @@ module "container_definition_fluentbit" {
 module "ecs_service_task" {
   count                     = length(var.target_group_arn) == 0 && length(var.schedule_expression) == 0 ? 1 : 0
   source                    = "applike/ecs-service/aws"
-  version                   = "1.2.0"
+  version                   = "1.3.0"
   context                   = module.this.context
   container_definition_json = "[${join("", module.container_definition.*.json_map_encoded)},${module.container_definition_fluentbit.json_map_encoded}]"
   ecs_cluster_arn           = data.aws_ecs_cluster.default.id
@@ -124,7 +124,7 @@ module "ecs_service_task" {
 module "ecs_lb_service_task" {
   count                             = length(var.target_group_arn) > 0 ? 1 : 0
   source                            = "applike/ecs-service/aws"
-  version                           = "1.2.0"
+  version                           = "1.3.0"
   context                           = module.this.context
   container_definition_json         = "[${join("", module.container_definition.*.json_map_encoded)},${module.container_definition_fluentbit.json_map_encoded}]"
   ecs_cluster_arn                   = data.aws_ecs_cluster.default.id
@@ -157,7 +157,7 @@ module "ecs_lb_service_task" {
 module "ecs_scheduled_task" {
   count                     = length(var.schedule_expression) > 0 ? 1 : 0
   source                    = "applike/ecs-scheduled-task/aws"
-  version                   = "1.1.1"
+  version                   = "1.2.0"
   context                   = module.this.context
   container_definition_json = "[${join("", module.container_definition_scheduled.*.json_map_encoded)},${module.container_definition_fluentbit.json_map_encoded}]"
   ecs_cluster_arn           = data.aws_ecs_cluster.default.id
