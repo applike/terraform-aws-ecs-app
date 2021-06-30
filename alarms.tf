@@ -1,6 +1,6 @@
 module "alarm-service-resources" {
   source                               = "applike/alarm-service-resources/aws"
-  version                              = "1.1.0"
+  version                              = "1.1.1"
   context                              = module.this.context
   enabled                              = var.resource_alarms_enabled
   treat_missing_data                   = var.resource_alarms_treat_missing_data
