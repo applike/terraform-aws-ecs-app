@@ -1,9 +1,9 @@
 module "alarm-service-resources" {
   source                               = "applike/alarm-service-resources/aws"
-  version                              = "1.1.1"
+  version                              = "1.1.2"
   context                              = module.this.context
   enabled                              = var.resource_alarms_enabled
-  treat_missing_data                   = var.resource_alarms_treat_missing_data
+  scheduled_task                       = local.scheduled_task
   average_resource_period              = var.resource_alarms_average_period
   average_resource_evaluation_periods  = var.resource_alarms_average_evaluation_periods
   average_resource_datapoints_to_alarm = var.resource_alarms_average_datapoints_to_alarm

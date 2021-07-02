@@ -24,4 +24,5 @@ locals {
     "traefik.http.services.health-${module.this.id}.loadbalancer.server.port"   = var.port_health
     "traefik.http.routers.health-${module.this.id}.rule"                        = "Host(`${module.locals_label.id}.${var.traefik_domain}`)"
   })
+  scheduled_task = length(var.schedule_expression) != 0 ? true : false
 }
