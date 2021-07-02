@@ -1,5 +1,5 @@
 module "container_definition" {
-  count                        = length(var.schedule_expression) == 0 ? 1 : 0
+  count                        = local.scheduled_task == false ? 1 : 0
   source                       = "cloudposse/ecs-container-definition/aws"
   version                      = "0.57.0"
   container_name               = module.this.application
@@ -45,7 +45,7 @@ module "container_definition" {
 }
 
 module "container_definition_scheduled" {
-  count                        = length(var.schedule_expression) > 0 ? 1 : 0
+  count                        = local.scheduled_task ? 1 : 0
   source                       = "cloudposse/ecs-container-definition/aws"
   version                      = "0.57.0"
   container_name               = module.this.application
@@ -98,7 +98,7 @@ module "container_definition_fluentbit" {
 }
 
 module "ecs_service_task" {
-  count                     = length(var.target_group_arn) == 0 && length(var.schedule_expression) == 0 ? 1 : 0
+  count                     = length(var.target_group_arn) == 0 && local.scheduled_task == false ? 1 : 0
   source                    = "applike/ecs-service/aws"
   version                   = "1.3.1"
   context                   = module.this.context
@@ -155,7 +155,7 @@ module "ecs_lb_service_task" {
 }
 
 module "ecs_scheduled_task" {
-  count                     = length(var.schedule_expression) > 0 ? 1 : 0
+  count                     = local.scheduled_task ? 1 : 0
   source                    = "applike/ecs-scheduled-task/aws"
   version                   = "1.2.1"
   context                   = module.this.context
