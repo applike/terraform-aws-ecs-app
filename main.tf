@@ -72,7 +72,7 @@ module "container_definition_fluentbit" {
   container_memory_reservation = 4
 
   firelens_configuration = {
-    type = "fluentbit"
+    type    = "fluentbit"
     options = {
       config-file-type  = "file",
       config-file-value = "/fluent-bit/etc/extra.conf"
@@ -81,7 +81,7 @@ module "container_definition_fluentbit" {
 
   log_configuration = {
     logDriver = "awslogs"
-    options = {
+    options   = {
       awslogs-group         = "firelens-container",
       awslogs-region        = "eu-central-1"
       awslogs-create-group  = "true",
@@ -108,17 +108,19 @@ module "ecs_service_task" {
   task_exec_role_arn        = data.aws_iam_role.default.arn
   desired_count             = var.desired_count
 
+  propagate_tags = var.propagate_tags
+
   ordered_placement_strategy = [
     {
       type  = "spread"
       field = "instanceId"
-  }]
+    }]
 
   service_placement_constraints = [
     {
       type       = "memberOf"
       expression = "attribute:lifecycle == spot"
-  }]
+    }]
 }
 
 module "ecs_lb_service_task" {
@@ -134,24 +136,26 @@ module "ecs_lb_service_task" {
   health_check_grace_period_seconds = var.health_check_grace_period_seconds
   service_registries                = var.service_registries
 
+  propagate_tags = var.propagate_tags
+
   ecs_load_balancers = [
     {
       target_group_arn = var.target_group_arn
       container_name   = module.this.application
       container_port   = var.port_gateway
-  }]
+    }]
 
   ordered_placement_strategy = [
     {
       type  = "spread"
       field = "instanceId"
-  }]
+    }]
 
   service_placement_constraints = [
     {
       type       = "memberOf"
       expression = "attribute:lifecycle == spot"
-  }]
+    }]
 }
 
 module "ecs_scheduled_task" {
