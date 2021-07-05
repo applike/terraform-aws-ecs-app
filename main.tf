@@ -72,7 +72,7 @@ module "container_definition_fluentbit" {
   container_memory_reservation = 4
 
   firelens_configuration = {
-    type    = "fluentbit"
+    type = "fluentbit"
     options = {
       config-file-type  = "file",
       config-file-value = "/fluent-bit/etc/extra.conf"
@@ -81,7 +81,7 @@ module "container_definition_fluentbit" {
 
   log_configuration = {
     logDriver = "awslogs"
-    options   = {
+    options = {
       awslogs-group         = "firelens-container",
       awslogs-region        = "eu-central-1"
       awslogs-create-group  = "true",
@@ -114,13 +114,13 @@ module "ecs_service_task" {
     {
       type  = "spread"
       field = "instanceId"
-    }]
+  }]
 
   service_placement_constraints = [
     {
       type       = "memberOf"
       expression = "attribute:lifecycle == spot"
-    }]
+  }]
 }
 
 module "ecs_lb_service_task" {
@@ -143,19 +143,19 @@ module "ecs_lb_service_task" {
       target_group_arn = var.target_group_arn
       container_name   = module.this.application
       container_port   = var.port_gateway
-    }]
+  }]
 
   ordered_placement_strategy = [
     {
       type  = "spread"
       field = "instanceId"
-    }]
+  }]
 
   service_placement_constraints = [
     {
       type       = "memberOf"
       expression = "attribute:lifecycle == spot"
-    }]
+  }]
 }
 
 module "ecs_scheduled_task" {

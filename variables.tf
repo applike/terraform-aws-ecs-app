@@ -23,7 +23,7 @@ variable "target_group_arn" {
 }
 
 variable "ulimits" {
-  type        = list(object({
+  type = list(object({
     name      = string
     hardLimit = number
     softLimit = number
@@ -105,7 +105,7 @@ variable "desired_count" {
 }
 
 variable "service_registries" {
-  type        = list(object({
+  type = list(object({
     registry_arn   = string
     port           = number
     container_name = string
@@ -189,7 +189,7 @@ variable "resource_alarms_maximum_memory_threshold" {
 
 variable "propagate_tags" {
   type        = string
-  default     = "NONE"
+  default     = null
   description = "Mode of propagating tags across services, task definitions and tasks. One of TASK_DEFINITION or SERVICE. Set to NONE to prevent tags from being propagated."
 }
 
