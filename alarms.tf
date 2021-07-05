@@ -1,4 +1,5 @@
 module "alarm-service-resources" {
+  count                                = var.resource_alarms_enabled ? 1 : 0
   source                               = "applike/alarm-service-resources/aws"
   version                              = "1.1.2"
   context                              = module.this.context

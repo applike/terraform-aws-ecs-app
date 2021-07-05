@@ -187,6 +187,12 @@ variable "resource_alarms_maximum_memory_threshold" {
   description = "Upper threshold for maximum memory utilization"
 }
 
+variable "propagate_tags" {
+  type        = string
+  default     = null
+  description = "Mode of propagating tags across services, task definitions and tasks. One of TASK_DEFINITION or SERVICE. Set to NONE to prevent tags from being propagated."
+}
+
 variable "working_directory" {
   type        = string
   description = "The working directory to run commands inside the container"
